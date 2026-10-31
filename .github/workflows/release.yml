@@ -1,0 +1,84 @@
+name: release
+
+# Releases the wheel of an existing tag (Actions > release > Run workflow). The workflow is
+# dispatched from main and checks out the tag, so the build uses the tag's tree. With
+# dry_run (the default) the release stays a draft after its assets are re-downloaded and
+# verified; without it the draft is published. A published release is never replaced.
+# Every step is a script under scripts/ that runs locally too.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to release (v<version>, an ancestor of main, no '+')
+        type: string
+        required: true
+      dry_run:
+        description: Leave the release as a draft
+        type: boolean
+        default: true
+      runner:
+        description: Where to run
+        type: choice
+        options: [stintmate-win, windows-latest]
+        default: stintmate-win
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  # One job: every job pays the runner's start, and the runner takes one job at a time.
+  release:
+    runs-on: ${{ inputs.runner == 'windows-latest' && 'windows-latest' || fromJSON('["self-hosted", "stintmate-win"]') }}
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      STINTMATE_IPC_READ_TOKEN: ${{ secrets.STINTMATE_IPC_READ_TOKEN }}
+      STINTMATE_IPC_PREBUILT: ${{ github.workspace }}\.native
+      TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+      - name: Check the tag
+        shell: pwsh
+        run: scripts/check-release.ps1 -Tag $env:TAG
+      - name: Fetch the native files
+        shell: pwsh
+        run: scripts/fetch-native.ps1
+      - name: Build the wheel
+        shell: pwsh
+        run: uv build --wheel
+      - name: Tests
+        shell: pwsh
+        run: uv run pytest -q
+      - name: Checksums
+        shell: pwsh
+        run: scripts/write-sums.ps1
+      - name: Draft release
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = $env:TAG.Substring(1)
+          $notes = Join-Path $env:RUNNER_TEMP 'notes.md'
+          [IO.File]::WriteAllText($notes, (scripts/changelog-section.ps1 -Version $version), (New-Object Text.UTF8Encoding($false)))
+          # A leftover draft of an earlier dry run is replaced; check-release refused published ones.
+          . scripts/lib.ps1
+          $old = Get-ReleaseByTag $env:TAG
+          if ($old -and $old.draft) { gh api -X DELETE "repos/$env:GH_REPO/releases/$($old.id)" }
+          $assets = @(Get-ChildItem dist -File | ForEach-Object { $_.FullName })
+          gh release create $env:TAG @assets --draft --verify-tag --title $env:TAG --notes-file $notes
+          if ($LASTEXITCODE -ne 0) { throw 'gh release create failed' }
+      - name: Verify the uploaded assets
+        shell: pwsh
+        run: scripts/verify-release.ps1 -Tag $env:TAG
+      - name: Publish
+        if: ${{ !inputs.dry_run }}
+        shell: pwsh
+        run: scripts/publish-release.ps1 -Tag $env:TAG

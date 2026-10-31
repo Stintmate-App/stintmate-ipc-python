@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stintmate-ipc"
+version = "0.3.1"
+description = "Stintmate IPC v2 for Python: ctypes over the native stintmate_ipc.dll"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12"
+dependencies = ["msgpack>=1.1,<2"]
+classifiers = ["Operating System :: Microsoft :: Windows"]
+
+[project.scripts]
+stintmate-ipc-check = "stintmate_ipc.check:run"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stintmate_ipc"]
+
+[tool.hatch.build.targets.wheel.hooks.custom]
+path = "hatch_build.py"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+# uv rebuilds this path dependency only when these change (including the sources of a ../stintmate-ipc checkout, when there is one).
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "hatch_build.py" },
+    { file = "src/**/*.py" },
+    { file = "../stintmate-ipc/Cargo.toml" },
+    { file = "../stintmate-ipc/Cargo.lock" },
+    { file = "../stintmate-ipc/rust-toolchain.toml" },
+    { env = "STINTMATE_IPC_PREBUILT" },
+    { file = "../stintmate-ipc/crates/**/*.rs" },
+    { file = "../stintmate-ipc/crates/*/Cargo.toml" },
+]

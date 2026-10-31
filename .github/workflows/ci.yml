@@ -1,0 +1,46 @@
+name: ci
+
+# Minutes are limited (free organisation, Windows counts double): CI runs by hand only
+# (Actions > ci > Run workflow); run the same steps locally before each merge (README, "Building").
+# It runs on the organisation's own Windows runner `stintmate-win` (no GitHub minutes; private
+# repositories and workflow_dispatch only); `windows-latest` is the fallback when it is down.
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Where to run
+        type: choice
+        options: [stintmate-win, windows-latest]
+        default: stintmate-win
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # One job: every job pays the runner's start, and the runner takes one job at a time.
+  ci:
+    runs-on: ${{ inputs.runner == 'windows-latest' && 'windows-latest' || fromJSON('["self-hosted", "stintmate-win"]') }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      # The native files of the stintmate-ipc release this version wraps, hash-checked.
+      - name: Fetch the native files
+        shell: pwsh
+        env:
+          STINTMATE_IPC_READ_TOKEN: ${{ secrets.STINTMATE_IPC_READ_TOKEN }}
+        run: scripts/fetch-native.ps1
+      - name: Build the wheel
+        shell: pwsh
+        env:
+          STINTMATE_IPC_PREBUILT: ${{ github.workspace }}\.native
+        run: uv build --wheel
+      - name: Tests
+        shell: pwsh
+        env:
+          STINTMATE_IPC_PREBUILT: ${{ github.workspace }}\.native
+        run: uv run pytest -q

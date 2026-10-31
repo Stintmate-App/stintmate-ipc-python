@@ -1,0 +1,1522 @@
+{
+ "all": [
+  "CallCancelled",
+  "CallTimeout",
+  "Client",
+  "ClientSubscription",
+  "ConnectionLost",
+  "Context",
+  "Endpoint",
+  "EndpointInUse",
+  "Event",
+  "EventChannel",
+  "HandshakeError",
+  "IpcError",
+  "KeyFile",
+  "KeyFileError",
+  "Layout",
+  "NotConnected",
+  "PROTOCOL_VERSION",
+  "Peer",
+  "PeerInfo",
+  "PendingCall",
+  "PipeBusy",
+  "PipeClosed",
+  "PipeError",
+  "PipeNotFound",
+  "ProtocolError",
+  "RegistryEntry",
+  "RemoteError",
+  "Sample",
+  "StateChannel",
+  "StreamChannel",
+  "SubscribeRequest",
+  "Subscription",
+  "SubscriptionView",
+  "connect",
+  "default_key_path",
+  "ensure_key",
+  "find_workspace",
+  "list_endpoints",
+  "pipe_path",
+  "pipe_user",
+  "read_key",
+  "registry_dir",
+  "short_name",
+  "spec_revision",
+  "version"
+ ],
+ "classes": {
+  "Client": {
+   "on_connect_error": {
+    "kind": "attr"
+   },
+   "__init__": {
+    "kind": "method",
+    "sig": [
+     [
+      "pipe",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "info",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "key",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "reconnect",
+      "KEYWORD_ONLY",
+      "True"
+     ],
+     [
+      "event_queue",
+      "KEYWORD_ONLY",
+      "1024"
+     ]
+    ]
+   },
+   "reconnect_delay": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "attempt",
+      "POSITIONAL_OR_KEYWORD",
+      "0"
+     ]
+    ]
+   },
+   "start": {
+    "kind": "method",
+    "sig": []
+   },
+   "connect": {
+    "kind": "method",
+    "sig": [
+     [
+      "timeout",
+      "POSITIONAL_OR_KEYWORD",
+      "5.0"
+     ]
+    ]
+   },
+   "wait_connected": {
+    "kind": "method",
+    "sig": [
+     [
+      "timeout",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   },
+   "peer": {
+    "kind": "property"
+   },
+   "connected": {
+    "kind": "property"
+   },
+   "last_error": {
+    "kind": "property"
+   },
+   "call": {
+    "kind": "method",
+    "sig": [
+     [
+      "method",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "params",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ],
+     [
+      "idempotency_key",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_progress",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "call_async": {
+    "kind": "method",
+    "sig": [
+     [
+      "method",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "params",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ],
+     [
+      "idempotency_key",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_progress",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "subscribe": {
+    "kind": "method",
+    "sig": [
+     [
+      "channel",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "callback",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "options",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_end",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ]
+    ]
+   },
+   "close": {
+    "kind": "method",
+    "sig": []
+   },
+   "stop": {
+    "kind": "method",
+    "sig": []
+   },
+   "peers": {
+    "kind": "property"
+   },
+   "on_connect": {
+    "kind": "property"
+   },
+   "on_disconnect": {
+    "kind": "property"
+   },
+   "on_redeclare": {
+    "kind": "property"
+   },
+   "method": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "handler",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "ordered",
+      "KEYWORD_ONLY",
+      "False"
+     ],
+     [
+      "idempotent",
+      "KEYWORD_ONLY",
+      "False"
+     ],
+     [
+      "idempotency_cache",
+      "KEYWORD_ONLY",
+      "True"
+     ],
+     [
+      "idempotency_ttl",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "doc",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "params",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "result",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "inline",
+      "KEYWORD_ONLY",
+      "False"
+     ]
+    ]
+   },
+   "remove_method": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "event_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "state_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "initial",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "stream_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "layout",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "rate_hz",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "queue",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "declarations": {
+    "kind": "method",
+    "sig": []
+   }
+  },
+  "ClientSubscription": {
+   "channel": {
+    "kind": "property"
+   },
+   "layout": {
+    "kind": "property"
+   },
+   "error": {
+    "kind": "property"
+   },
+   "subscribed": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": []
+   }
+  },
+  "Context": {
+   "peer": {
+    "kind": "property"
+   },
+   "id": {
+    "kind": "property"
+   },
+   "method": {
+    "kind": "property"
+   },
+   "version": {
+    "kind": "property"
+   },
+   "params": {
+    "kind": "property"
+   },
+   "idempotency_key": {
+    "kind": "property"
+   },
+   "cancelled": {
+    "kind": "property"
+   },
+   "remaining": {
+    "kind": "property"
+   },
+   "wait_cancelled": {
+    "kind": "method",
+    "sig": [
+     [
+      "timeout",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   },
+   "expired": {
+    "kind": "method",
+    "sig": []
+   },
+   "progress": {
+    "kind": "method",
+    "sig": [
+     [
+      "data",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "extend_s",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   }
+  },
+  "Endpoint": {
+   "peers": {
+    "kind": "property"
+   },
+   "on_connect": {
+    "kind": "property"
+   },
+   "on_disconnect": {
+    "kind": "property"
+   },
+   "on_redeclare": {
+    "kind": "property"
+   },
+   "method": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "handler",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "ordered",
+      "KEYWORD_ONLY",
+      "False"
+     ],
+     [
+      "idempotent",
+      "KEYWORD_ONLY",
+      "False"
+     ],
+     [
+      "idempotency_cache",
+      "KEYWORD_ONLY",
+      "True"
+     ],
+     [
+      "idempotency_ttl",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "doc",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "params",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "result",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "inline",
+      "KEYWORD_ONLY",
+      "False"
+     ]
+    ]
+   },
+   "remove_method": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "event_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "state_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "initial",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "stream_channel": {
+    "kind": "method",
+    "sig": [
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "layout",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "versions",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "rate_hz",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "queue",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "declarations": {
+    "kind": "method",
+    "sig": []
+   },
+   "path": {
+    "kind": "property"
+   },
+   "short_name": {
+    "kind": "property"
+   },
+   "run": {
+    "kind": "property"
+   },
+   "info": {
+    "kind": "property"
+   },
+   "registry": {
+    "kind": "property"
+   },
+   "on_handshake_failed": {
+    "kind": "property"
+   },
+   "__init__": {
+    "kind": "method",
+    "sig": [
+     [
+      "info",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "key",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "pipe",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "registry",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "handshake_timeout",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "handler_threads",
+      "KEYWORD_ONLY",
+      "8"
+     ],
+     [
+      "heartbeat_ms",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "event_queue",
+      "KEYWORD_ONLY",
+      "1024"
+     ],
+     [
+      "event_queue_bytes",
+      "KEYWORD_ONLY",
+      "8_388_608"
+     ],
+     [
+      "max_inflight",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "features",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "start": {
+    "kind": "method",
+    "sig": []
+   },
+   "stop": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "'shutting_down'"
+     ],
+     [
+      "message",
+      "POSITIONAL_OR_KEYWORD",
+      "'the endpoint stops'"
+     ]
+    ]
+   }
+  },
+  "Event": {
+   "channel": {
+    "kind": "attr"
+   },
+   "seq": {
+    "kind": "attr"
+   },
+   "ts": {
+    "kind": "attr"
+   },
+   "data": {
+    "kind": "attr"
+   },
+   "snapshot": {
+    "kind": "attr"
+   }
+  },
+  "EventChannel": {
+   "name": {
+    "kind": "property"
+   },
+   "kind": {
+    "kind": "property"
+   },
+   "subscriber_count": {
+    "kind": "property"
+   },
+   "active": {
+    "kind": "property"
+   },
+   "on_subscribe": {
+    "kind": "property"
+   },
+   "on_active": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "'channel_closed'"
+     ],
+     [
+      "message",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ]
+    ]
+   },
+   "publish": {
+    "kind": "method",
+    "sig": [
+     [
+      "data",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "ts",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "accept",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   }
+  },
+  "FlagEvent": {
+   "is_set": {
+    "kind": "method",
+    "sig": []
+   },
+   "wait": {
+    "kind": "method",
+    "sig": [
+     [
+      "timeout",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   }
+  },
+  "KeyFile": {
+   "__init__": {
+    "kind": "method",
+    "sig": [
+     [
+      "path",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "create",
+      "POSITIONAL_OR_KEYWORD",
+      "False"
+     ]
+    ]
+   },
+   "path": {
+    "kind": "property"
+   },
+   "create": {
+    "kind": "property"
+   },
+   "__call__": {
+    "kind": "method",
+    "sig": []
+   }
+  },
+  "Layout": {
+   "struct": {
+    "kind": "property"
+   },
+   "__init__": {
+    "kind": "method",
+    "sig": [
+     [
+      "fields",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   },
+   "name": {
+    "kind": "property"
+   },
+   "size": {
+    "kind": "property"
+   },
+   "fields": {
+    "kind": "property"
+   },
+   "names": {
+    "kind": "property"
+   },
+   "pack": {
+    "kind": "method",
+    "sig": [
+     [
+      "values",
+      "VAR_POSITIONAL",
+      null
+     ]
+    ]
+   },
+   "pack_dict": {
+    "kind": "method",
+    "sig": [
+     [
+      "values",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "unpack": {
+    "kind": "method",
+    "sig": [
+     [
+      "body",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "unpack_dict": {
+    "kind": "method",
+    "sig": [
+     [
+      "body",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "to_wire": {
+    "kind": "method",
+    "sig": []
+   },
+   "from_wire": {
+    "kind": "static",
+    "sig": [
+     [
+      "d",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   }
+  },
+  "Peer": {
+   "info": {
+    "kind": "property"
+   },
+   "pid": {
+    "kind": "property"
+   },
+   "run": {
+    "kind": "property"
+   },
+   "is_open": {
+    "kind": "property"
+   },
+   "closed": {
+    "kind": "property"
+   },
+   "close_code": {
+    "kind": "property"
+   },
+   "close_message": {
+    "kind": "property"
+   },
+   "decl": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "'normal'"
+     ],
+     [
+      "message",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ]
+    ]
+   },
+   "call": {
+    "kind": "method",
+    "sig": [
+     [
+      "method",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "params",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ],
+     [
+      "idempotency_key",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_progress",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "call_async": {
+    "kind": "method",
+    "sig": [
+     [
+      "method",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "params",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ],
+     [
+      "idempotency_key",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_progress",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   },
+   "subscribe": {
+    "kind": "method",
+    "sig": [
+     [
+      "channel",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "callback",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "version",
+      "KEYWORD_ONLY",
+      "1"
+     ],
+     [
+      "options",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "on_end",
+      "KEYWORD_ONLY",
+      "None"
+     ],
+     [
+      "timeout",
+      "KEYWORD_ONLY",
+      "5.0"
+     ]
+    ]
+   }
+  },
+  "PeerInfo": {
+   "app": {
+    "kind": "attr"
+   },
+   "name": {
+    "kind": "attr"
+   },
+   "version": {
+    "kind": "attr"
+   },
+   "process": {
+    "kind": "attr"
+   },
+   "meta": {
+    "kind": "attr"
+   },
+   "__init__": {
+    "kind": "method",
+    "sig": [
+     [
+      "app",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "name",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ],
+     [
+      "version",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ],
+     [
+      "process",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ],
+     [
+      "meta",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   }
+  },
+  "PendingCall": {
+   "id": {
+    "kind": "property"
+   },
+   "method": {
+    "kind": "property"
+   },
+   "done": {
+    "kind": "method",
+    "sig": []
+   },
+   "add_done_callback": {
+    "kind": "method",
+    "sig": [
+     [
+      "cb",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   },
+   "exception": {
+    "kind": "method",
+    "sig": []
+   },
+   "cancel": {
+    "kind": "method",
+    "sig": [
+     [
+      "reason",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ]
+    ]
+   },
+   "result": {
+    "kind": "method",
+    "sig": [
+     [
+      "timeout",
+      "POSITIONAL_OR_KEYWORD",
+      "None"
+     ]
+    ]
+   }
+  },
+  "Sample": {
+   "channel": {
+    "kind": "attr"
+   },
+   "seq": {
+    "kind": "attr"
+   },
+   "t_ns": {
+    "kind": "attr"
+   },
+   "dropped": {
+    "kind": "attr"
+   },
+   "body": {
+    "kind": "attr"
+   },
+   "layout": {
+    "kind": "attr"
+   },
+   "values": {
+    "kind": "method",
+    "sig": []
+   },
+   "as_dict": {
+    "kind": "method",
+    "sig": []
+   }
+  },
+  "StateChannel": {
+   "name": {
+    "kind": "property"
+   },
+   "kind": {
+    "kind": "property"
+   },
+   "subscriber_count": {
+    "kind": "property"
+   },
+   "active": {
+    "kind": "property"
+   },
+   "on_subscribe": {
+    "kind": "property"
+   },
+   "on_active": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "'channel_closed'"
+     ],
+     [
+      "message",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ]
+    ]
+   },
+   "value": {
+    "kind": "property"
+   },
+   "set": {
+    "kind": "method",
+    "sig": [
+     [
+      "value",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ]
+    ]
+   }
+  },
+  "StreamChannel": {
+   "name": {
+    "kind": "property"
+   },
+   "kind": {
+    "kind": "property"
+   },
+   "subscriber_count": {
+    "kind": "property"
+   },
+   "active": {
+    "kind": "property"
+   },
+   "on_subscribe": {
+    "kind": "property"
+   },
+   "on_active": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": [
+     [
+      "code",
+      "POSITIONAL_OR_KEYWORD",
+      "'channel_closed'"
+     ],
+     [
+      "message",
+      "POSITIONAL_OR_KEYWORD",
+      "''"
+     ]
+    ]
+   },
+   "layout": {
+    "kind": "property"
+   },
+   "send": {
+    "kind": "method",
+    "sig": [
+     [
+      "body",
+      "POSITIONAL_OR_KEYWORD",
+      null
+     ],
+     [
+      "t_ns",
+      "KEYWORD_ONLY",
+      "None"
+     ]
+    ]
+   }
+  },
+  "SubscribeRequest": {
+   "peer": {
+    "kind": "attr"
+   },
+   "version": {
+    "kind": "attr"
+   },
+   "options": {
+    "kind": "attr"
+   }
+  },
+  "Subscription": {
+   "peer": {
+    "kind": "property"
+   },
+   "ended": {
+    "kind": "property"
+   },
+   "channel": {
+    "kind": "property"
+   },
+   "layout": {
+    "kind": "property"
+   },
+   "close": {
+    "kind": "method",
+    "sig": []
+   }
+  },
+  "SubscriptionView": {
+   "peer": {
+    "kind": "attr"
+   },
+   "pid": {
+    "kind": "attr"
+   },
+   "version": {
+    "kind": "attr"
+   },
+   "options": {
+    "kind": "attr"
+   },
+   "connection": {
+    "kind": "attr"
+   }
+  }
+ },
+ "functions": {
+  "connect": [
+   [
+    "pipe",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ],
+   [
+    "info",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ],
+   [
+    "key",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ],
+   [
+    "timeout",
+    "KEYWORD_ONLY",
+    "5.0"
+   ],
+   [
+    "node",
+    "KEYWORD_ONLY",
+    "None"
+   ],
+   [
+    "event_queue",
+    "KEYWORD_ONLY",
+    "1024"
+   ]
+  ],
+  "default_key_path": [
+   [
+    "workspace",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ]
+  ],
+  "ensure_key": [
+   [
+    "path",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ]
+  ],
+  "find_workspace": [],
+  "format_key": [
+   [
+    "key",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ]
+  ],
+  "parse_key": [
+   [
+    "text",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ]
+  ],
+  "pipe_path": [
+   [
+    "app",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ],
+   [
+    "process",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ],
+   [
+    "user",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ]
+  ],
+  "pipe_user": [
+   [
+    "user",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ]
+  ],
+  "read_key": [
+   [
+    "path",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ]
+  ],
+  "registry_dir": [
+   [
+    "workspace",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ]
+  ],
+  "short_name": [
+   [
+    "app",
+    "POSITIONAL_OR_KEYWORD",
+    null
+   ],
+   [
+    "process",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ],
+   [
+    "user",
+    "POSITIONAL_OR_KEYWORD",
+    "None"
+   ]
+  ],
+  "spec_revision": [],
+  "version": []
+ },
+ "exceptions": {
+  "IpcError": [
+   "Exception"
+  ],
+  "PipeError": [
+   "IpcError",
+   "OSError"
+  ],
+  "PipeNotFound": [
+   "PipeError"
+  ],
+  "PipeBusy": [
+   "PipeError"
+  ],
+  "PipeClosed": [
+   "PipeError"
+  ],
+  "EndpointInUse": [
+   "PipeError"
+  ],
+  "KeyFileError": [
+   "IpcError"
+  ],
+  "ProtocolError": [
+   "IpcError"
+  ],
+  "HandshakeError": [
+   "IpcError"
+  ],
+  "NotConnected": [
+   "IpcError"
+  ],
+  "ConnectionLost": [
+   "IpcError"
+  ],
+  "CallTimeout": [
+   "IpcError",
+   "TimeoutError"
+  ],
+  "CallCancelled": [
+   "IpcError"
+  ],
+  "RemoteError": [
+   "IpcError"
+  ]
+ },
+ "check_all": [
+  "cli",
+  "main",
+  "run"
+ ],
+ "keyfile_all": [
+  "format_key",
+  "parse_key"
+ ],
+ "decl_names": [
+  "ChannelDecl",
+  "Declarations",
+  "MethodDecl",
+  "valid_name"
+ ]
+}
