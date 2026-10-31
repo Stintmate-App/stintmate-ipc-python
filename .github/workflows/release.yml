@@ -73,6 +73,10 @@ jobs:
       - name: Tests
         shell: pwsh
         run: uv run pytest -q
+      # uv writes a .gitignore into dist\, which is not an asset.
+      - name: Keep only the wheel in dist
+        shell: pwsh
+        run: Remove-Item dist\.gitignore -Force -ErrorAction SilentlyContinue
       - name: Checksums
         shell: pwsh
         run: scripts/write-sums.ps1
