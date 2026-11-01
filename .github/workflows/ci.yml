@@ -1,9 +1,8 @@
 name: ci
 
-# Minutes are limited (free organisation, Windows counts double): CI runs by hand only
-# (Actions > ci > Run workflow); run the same steps locally before each merge (README, "Building").
-# It runs on the organisation's own Windows runner `stintmate-win` (no GitHub minutes; private
-# repositories and workflow_dispatch only); `windows-latest` is the fallback when it is down.
+# CI runs by hand only (Actions > ci > Run workflow). It builds the wheel and runs the tests
+# described in the README ("Building", "Tests"). The default runner is a self-hosted Windows
+# machine; `windows-latest` is the alternative.
 on:
   workflow_dispatch:
     inputs:

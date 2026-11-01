@@ -1,4 +1,4 @@
-"""Key file, naming, registry and layout: parity with the 0.1.4 package's tests."""
+"""Key file, naming, registry and layout."""
 
 import ctypes
 import json

@@ -49,12 +49,14 @@ class PeerInfo:
 
     @classmethod
     def from_wire(cls, d: dict[str, Any]) -> PeerInfo:
+        """A ``PeerInfo`` from the ``peer`` map of a ``hello``, ``auth`` or ``welcome`` message."""
         return cls(str(d.get("app", "")), str(d.get("name", "")), str(d.get("version", "")),
                    d.get("process"), dict(d.get("meta") or {}))
 
 
 class KeyFile:
-    """A key source that re-reads the file each time it is asked."""
+    """A key source that re-reads the file each time it is asked; with ``create=True`` a
+    missing file is created first (``ensure_key``), otherwise it must exist (``read_key``)."""
 
     def __init__(self, path: str | os.PathLike[str], create: bool = False) -> None:
         self._path = Path(path)
@@ -62,10 +64,12 @@ class KeyFile:
 
     @property
     def path(self) -> Path:
+        """The key file's path."""
         return self._path
 
     @property
     def create(self) -> bool:
+        """Whether a missing key file is created when the key is asked for."""
         return self._create
 
     def __call__(self) -> bytes:
@@ -108,6 +112,7 @@ def ensure_key(path: str | os.PathLike[str]) -> bytes:
 
 
 def read_key(path: str | os.PathLike[str]) -> bytes:
+    """The 32 key bytes of the key file at ``path``, which must exist."""
     return _lib.call_buf("read_key", _path_arg(path))
 
 
@@ -124,23 +129,31 @@ def format_key(key: bytes) -> bytes:
 
 
 def pipe_user(user: str | None = None) -> str:
+    """The user part of an endpoint name: ``user`` (default: the current Windows user) with
+    ASCII letters lowercased."""
     return _text(_lib.call_buf("pipe_user", _lib.cstr(user)))
 
 
 def short_name(app: str, process: str | None = None, user: str | None = None) -> str:
+    """The endpoint's short name, ``stintmate-<app>[-<process>]-<user>``: the name bound into
+    the handshake's MACs."""
     return _text(_lib.call_buf("short_name", _lib.cstr(app), _lib.cstr(process), _lib.cstr(user)))
 
 
 def pipe_path(app: str, process: str | None = None, user: str | None = None) -> str:
+    """The pipe path of the same name: ``\\\\.\\pipe\\`` followed by ``short_name``."""
     return _text(_lib.call_buf("pipe_path", _lib.cstr(app), _lib.cstr(process), _lib.cstr(user)))
 
 
 def find_workspace() -> Path | None:
+    """The workspace folder (SPEC section 4.3: ``STINTMATE_WORKSPACE``, then the pointer file
+    ``%APPDATA%\\Stintmate\\settings.json``), or ``None`` when there is none."""
     raw = _lib.call_buf("find_workspace")
     return Path(_text(raw)) if raw else None
 
 
 def registry_dir(workspace: str | os.PathLike[str]) -> Path:
+    """The endpoint registry folder of ``workspace``: ``<workspace>\\ipc\\endpoints``."""
     return Path(_text(_lib.call_buf("registry_dir", _path_arg(workspace))))
 
 

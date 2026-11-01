@@ -1,6 +1,6 @@
 """Stintmate IPC v2 for Python: ctypes over the native ``stintmate_ipc.dll``.
 
-The public surface is the one of v0.2.0 (the PyO3 binding). The client side (``_client``) and
+The client side (``_client``) and
 the endpoint side (``_endpoint``) names are imported lazily (module ``__getattr__``) so the
 core of the package loads on its own.
 """

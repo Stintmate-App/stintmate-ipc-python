@@ -360,7 +360,7 @@ def test_idempotency_ttl_expires_answers(endpoint, client):
 
 
 
-# ---------------------------------------------------------------------- cancel (0.1.2)
+# ---------------------------------------------------------------------- cancel
 
 def _slow_cancel_aware(ep, name="t.slow"):
     saw = threading.Event()

@@ -1,4 +1,4 @@
-"""Types of the endpoint side (the public surface of v0.2.0)."""
+"""Types of the endpoint side (the public surface)."""
 
 from collections.abc import Callable, Mapping
 from os import PathLike

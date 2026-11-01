@@ -1,4 +1,4 @@
-"""The public surface of the package against v0.2.0 (``parity_data.json``, frozen).
+"""The public surface of the package against the recorded public surface (``parity_data.json``, frozen).
 
 Every public name is compared: signatures, members, exception bases.
 """

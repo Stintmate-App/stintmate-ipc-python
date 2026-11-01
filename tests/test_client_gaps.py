@@ -1,4 +1,4 @@
-"""Client gaps found by migrating applications: behaviours of stintmate-ipc 0.1.4."""
+"""Client gaps found by migrating applications: behaviours the client keeps."""
 
 import gc
 import secrets
