@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 (2026-11-01)
+
+- Wraps `stintmate-ipc` v0.3.2. The Python API is unchanged.
+
 ## 0.3.1+docs.3 (2026-11-01)
 
 - The `release` workflow expects `gh` on the runner, as GitHub's Windows image has it, and no
