@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stintmate-ipc"
-version = "0.3.2"
+version = "0.3.3"
 description = "Stintmate IPC v2 for Python: ctypes over the native stintmate_ipc.dll"
 readme = "README.md"
 license = "Apache-2.0"

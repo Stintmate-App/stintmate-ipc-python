@@ -7,18 +7,18 @@ Rust toolchain.
 
 - Windows x64 only; Python 3.12 or newer. The one Python dependency is `msgpack`.
 - The version of this package equals the version of the `stintmate-ipc` release whose native
-  files it wraps (0.3.2 wraps `stintmate-ipc` v0.3.2).
+  files it wraps (0.3.3 wraps `stintmate-ipc` v0.3.3).
 - Licence: Apache-2.0 (`LICENSE`, `NOTICE`). Changes: `CHANGELOG.md`.
 
 ## Install
 
 Download the wheel and `SHA256SUMS` from a
 [release of this repository](https://github.com/Stintmate-App/stintmate-ipc-python/releases),
-check the hash (`Get-FileHash .\stintmate_ipc-0.3.2-py3-none-win_amd64.whl -Algorithm SHA256`
+check the hash (`Get-FileHash .\stintmate_ipc-0.3.3-py3-none-win_amd64.whl -Algorithm SHA256`
 must print the value listed for the wheel in `SHA256SUMS`), and install:
 
 ```powershell
-uv pip install .\stintmate_ipc-0.3.2-py3-none-win_amd64.whl
+uv pip install .\stintmate_ipc-0.3.3-py3-none-win_amd64.whl
 ```
 
 The protocol, the C ABI and the contract are documented in the
