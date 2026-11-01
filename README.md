@@ -71,8 +71,7 @@ them:
   release `v<version>` (the version in `pyproject.toml`), checks the hashes and writes them to
   `.native\`. Only the newest release is guaranteed to still have its assets: for an older tag
   the download can fail, and that tag cannot be built from a release (build it from source with
-  cargo instead). While the release is private, set `STINTMATE_IPC_READ_TOKEN` to a GitHub token that
-  can read it; `STINTMATE_IPC_RELEASE` replaces the source with a local folder or a base URL.
+  cargo instead). `STINTMATE_IPC_RELEASE` replaces the source with a local folder or a base URL.
   Then point the hook at the folder:
 
   ```powershell
@@ -110,3 +109,9 @@ and `dry_run` (default: leave a draft). It checks the tag, builds and tests the 
 uploads the wheel and `SHA256SUMS` as a draft, downloads them again to compare hashes, and
 publishes unless `dry_run`. The steps are the scripts in `scripts/`. `ci` runs the build and the
 tests by hand.
+
+## Contributing
+
+Issues are welcome. Pull requests are welcome too, but there is no promise that they are
+reviewed or merged. For a larger change, open an issue first. Report a security problem
+privately, as described in [`SECURITY.md`](SECURITY.md).
