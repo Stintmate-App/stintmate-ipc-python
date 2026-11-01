@@ -3,7 +3,7 @@
     stintmate-ipc-check server <pipe> --key-file <key>   # check a server (an endpoint)
     stintmate-ipc-check client <pipe> --key-file <key>   # serve a test endpoint, check a client
     stintmate-ipc-check list [--workspace <dir>]         # endpoints in the registry
-    stintmate-ipc-check keygen <path>                    # create a key file (if missing)
+    stintmate-ipc-check keygen [path]                    # create a key file (if missing)
 
 Exit status 0 when every check passed (warnings allowed), 1 when one failed, 2 on a usage
 error. ``stintmate-ipc-check --help`` lists the options. The checks are written in Rust; this

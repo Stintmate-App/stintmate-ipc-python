@@ -1,7 +1,7 @@
 """The endpoint side: ``Endpoint``, the node API it shares with ``Client`` (methods, channels,
 hooks), ``Context`` and the channels (ctypes over the native library).
 
-It behaves as the v0.2.0 binding did. Handlers run on the library's handler pool (or the
+Handlers run on the library's handler pool (or the
 connection's lane for ``inline``), hooks on its hooks thread; ``accept`` runs on the thread that
 calls ``publish``. A handler's request is answered exactly once, by this module, when the handler
 returns or raises; the C request is consumed by the answer, so a :class:`Context` that outlives
@@ -147,7 +147,7 @@ class Context:
                 self._req = None
             return _fn(fn_name)(req, *args)
 
-    # -- the v0.2.0 surface
+    # -- the public surface
     @property
     def peer(self) -> Any:
         """The connection the request arrived on (the same object while this context lives)."""
@@ -694,7 +694,14 @@ class Node:
         """Offers a method; ``handler(ctx, params) -> result`` runs on a pool thread
         (``ordered``: one at a time per connection, in arrival order; ``inline``: on the
         connection's lane, for handlers that answer from memory and never block). Usable as a
-        decorator. Raise ``RemoteError`` from the handler to answer an error."""
+        decorator. Raise ``RemoteError`` from the handler to answer an error.
+
+        ``versions``: the versions offered (default ``[1]``). ``idempotent``: the method accepts
+        an idempotency key; ``idempotency_cache``: keep the answers to such keys (default True);
+        ``idempotency_ttl``: seconds an answer is kept, greater than 0 (``None``: the library's
+        default). ``doc``: one line for people, shown in the declaration. ``params`` and
+        ``result``: JSON Schema documents for the parameters and the result, published in the
+        declaration."""
         if idempotency_ttl is None:
             ttl_ms = -1
         elif idempotency_ttl > 0:
@@ -745,7 +752,7 @@ class Node:
 
     # -- channels
     def event_channel(self, name: str, *, versions: list[int] | None = None) -> EventChannel:
-        """Declares an event channel."""
+        """Declares an event channel; ``versions``: the versions offered (default ``[1]``)."""
         vers = _versions_of(versions)
         out = C.c_void_p()
         _check(_fn("event_channel")(self._node, _lib.cstr(name), _u32_array(vers), len(vers),
@@ -754,7 +761,8 @@ class Node:
 
     def state_channel(self, name: str, initial: Any = None, *,
                       versions: list[int] | None = None) -> StateChannel:
-        """Declares a state channel with an initial value."""
+        """Declares a state channel with an initial value; ``versions``: the versions offered
+        (default ``[1]``)."""
         vers = _versions_of(versions)
         init = packb(initial)
         out = C.c_void_p()
@@ -765,7 +773,10 @@ class Node:
     def stream_channel(self, name: str, layout: Layout, *, versions: list[int] | None = None,
                        rate_hz: float | None = None, queue: int | None = None
                        ) -> StreamChannel:
-        """Declares a stream channel with a layout."""
+        """Declares a stream channel with a layout. ``versions``: the versions offered (default
+        ``[1]``). ``rate_hz``: the nominal rate in Hz, declared when greater than 0 (``None``:
+        no rate is declared). ``queue``: samples one subscription may queue (``None``: one
+        second at ``rate_hz``, at least 64; 256 without a rate)."""
         if not isinstance(layout, Layout):
             raise TypeError("layout must be a Layout")
         vers = _versions_of(versions)
@@ -788,8 +799,15 @@ class Endpoint(Node):
     """The server of one endpoint: creates the pipe, authenticates every client and serves the
     methods and channels declared on it.
 
-    ``pipe``: a full path or a short name (default ``stintmate-<app>[-<process>]-<user>``);
-    ``registry``: a folder for the endpoint registry entry; ``key``: a ``KeyFile`` or 32 bytes.
+    ``info``: who this endpoint says it is (``PeerInfo``). ``key``: a ``KeyFile`` or the 32 key
+    bytes. ``pipe``: a full path or a short name (default ``stintmate-<app>[-<process>]-<user>``).
+    ``registry``: a folder for the endpoint registry entry (``None``: no entry is written).
+    ``handshake_timeout``: seconds a client has to authenticate (``None``: the library's
+    default). ``handler_threads``: size of the pool that runs method handlers (default 8).
+    ``heartbeat_ms``: the heartbeat period in milliseconds (``None``: the library's default).
+    ``event_queue`` and ``event_queue_bytes``: events and bytes one subscription may queue
+    (defaults 1024 and 8 MiB). ``max_inflight``: requests in flight per connection (``None``:
+    the library's default). ``features``: feature names to offer (``None``: none).
     """
 
     def __init__(self, info: PeerInfo, key: KeyFile | bytes, *, pipe: str | None = None,

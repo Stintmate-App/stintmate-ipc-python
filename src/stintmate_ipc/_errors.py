@@ -1,4 +1,4 @@
-"""The exceptions of the package (same hierarchy and attributes as 0.1.x).
+"""The exceptions of the package.
 
 Ordinary Python classes; `_lib.error_for` builds them from the library's error record.
 """

@@ -162,7 +162,7 @@ def test_callbacks_may_call_the_peer(endpoint, client):
 
 
 
-# ------------------------------------------------------------ filtered publish (0.1.3)
+# ------------------------------------------------------------ filtered publish
 
 
 def _two_clients(endpoint, client, app_b="other"):

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2+docs.2 (2026-11-01)
+
+- Documentation corrected against the code: a usage section in the README (an example that runs),
+  how to check the wheel's hash, which releases can still be built from their assets, docstrings for
+  the parameters of `Endpoint`, `method` and the channels and for the key and naming functions, and
+  the wording about earlier versions removed. The code is unchanged.
+
 ## 0.3.2+docs.1 (2026-11-01)
 
 - The README names the `stintmate-ipc` version this release wraps. The code is unchanged.

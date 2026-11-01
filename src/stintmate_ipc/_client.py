@@ -1,6 +1,6 @@
 """The client side: ``Client``, ``Peer``, calls and subscriptions over the native library.
 
-Behaves as the v0.2.0 binding did. Blocking library calls run with the GIL
+Blocking library calls run with the GIL
 released (ctypes drops it around every foreign call); waits are cut into slices so Ctrl+C is
 seen between them.
 """
@@ -363,7 +363,7 @@ def _attach(state: _SubState, ptr: int) -> None:
 
 
 #: The live subscriptions of connections: a subscription stays subscribed when the caller drops
-#: it (as in 0.2.0) until it ends or is closed. (The registry keeps only the state alive.)
+#: it until it ends or is closed. (The registry keeps only the state alive.)
 _KEPT: set[Any] = set()
 
 
@@ -414,6 +414,7 @@ class Subscription:
 
     @property
     def channel(self) -> str:
+        """The name of the channel this subscription is on."""
         return self._channel
 
     @property
@@ -450,6 +451,7 @@ class ClientSubscription:
 
     @property
     def channel(self) -> str:
+        """The name of the channel this subscription was made on."""
         return self._channel
 
     @property
@@ -771,7 +773,7 @@ class Client(Node):
                 raise self._not_connected()
 
     def _not_connected(self) -> BaseException:
-        """``NotConnected``, with the last connect error as its cause (as in 0.1.4)."""
+        """``NotConnected``, with the last connect error as its cause."""
         rec = unpackb(_lib.call_buf("client_last_error", self._ptr))
         if not isinstance(rec, dict):
             return E.NotConnected("not connected")

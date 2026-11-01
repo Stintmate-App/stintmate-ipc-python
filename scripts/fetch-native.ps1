@@ -1,6 +1,6 @@
 # Downloads the native files this binding wraps from the release `v<version>` of the
 # stintmate-ipc repository (version = the one in pyproject.toml), verifies them against the
-# release's SHA256SUMS (the header is for the tests of the prototypes) and writes them into .native\ (use it as STINTMATE_IPC_PREBUILT).
+# release's SHA256SUMS (the header is for the tests of the ctypes function prototypes) and writes them into .native\ (use it as STINTMATE_IPC_PREBUILT).
 #
 #   scripts\fetch-native.ps1
 #

@@ -1,5 +1,5 @@
 """The subscriber's local bounds (SPEC 12.4): a slow or stalled callback never stops the
-reader and never grows memory without bound. Ported from 0.1.4's test_pubsub."""
+reader and never grows memory without bound."""
 
 from __future__ import annotations
 

@@ -6,7 +6,7 @@
                                     "doc": "..."}},
      "channels": {"pitwall.lap_completed": {"kind": "event", "v": [1]},
                   "pitwall.connectors":    {"kind": "state", "v": [1]},
-                  "ams2.telemetry":        {"kind": "stream", "v": [1], "rate_hz": 200,
+                  "connector.telemetry":   {"kind": "stream", "v": [1], "rate_hz": 200,
                                             "layout": {"size": 48, "fields": [...]}}}}
 """
 

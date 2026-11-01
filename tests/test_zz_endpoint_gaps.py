@@ -1,4 +1,4 @@
-"""Binding gaps found by migrating a connector: behaviours of stintmate-ipc 0.1.4."""
+"""Binding gaps found by migrating a connector: behaviours the client keeps."""
 
 import secrets
 import threading
