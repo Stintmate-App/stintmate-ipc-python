@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2+docs.1 (2026-11-01)
+
+- The README names the `stintmate-ipc` version this release wraps. The code is unchanged.
+
 ## 0.3.2 (2026-11-01)
 
 - Wraps `stintmate-ipc` v0.3.2. The Python API is unchanged.

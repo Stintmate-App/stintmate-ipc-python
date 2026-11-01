@@ -7,7 +7,7 @@ Rust toolchain.
 
 - Windows x64 only; Python 3.12 or newer. The one Python dependency is `msgpack`.
 - The version of this package equals the version of the `stintmate-ipc` release whose native
-  files it wraps (0.3.2 wraps `stintmate-ipc` v0.3.1).
+  files it wraps (0.3.2 wraps `stintmate-ipc` v0.3.2).
 - Licence: Apache-2.0 (`LICENSE`, `NOTICE`). Changes: `CHANGELOG.md`.
 
 ## Install
