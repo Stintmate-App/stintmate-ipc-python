@@ -1,16 +1,9 @@
 name: ci
 
 # CI runs by hand only (Actions > ci > Run workflow). It builds the wheel and runs the tests
-# described in the README ("Building", "Tests"). The default runner is a self-hosted Windows
-# machine; `windows-latest` is the alternative.
+# described in the README ("Building", "Tests").
 on:
   workflow_dispatch:
-    inputs:
-      runner:
-        description: Where to run
-        type: choice
-        options: [stintmate-win, windows-latest]
-        default: stintmate-win
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -20,9 +13,9 @@ permissions:
   contents: read
 
 jobs:
-  # One job: every job pays the runner's start, and the runner takes one job at a time.
+  # One job: every job pays the runner's start.
   ci:
-    runs-on: ${{ inputs.runner == 'windows-latest' && 'windows-latest' || fromJSON('["self-hosted", "stintmate-win"]') }}
+    runs-on: windows-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -30,8 +23,6 @@ jobs:
       # The native files of the stintmate-ipc release this version wraps, hash-checked.
       - name: Fetch the native files
         shell: pwsh
-        env:
-          STINTMATE_IPC_READ_TOKEN: ${{ secrets.STINTMATE_IPC_READ_TOKEN }}
         run: scripts/fetch-native.ps1
       - name: Build the wheel
         shell: pwsh

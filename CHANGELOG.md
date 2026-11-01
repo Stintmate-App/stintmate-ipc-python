@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2+docs.3 (2026-11-01)
+
+- The repository is prepared for being public: the workflows run on GitHub-hosted Windows runners only (the `runner` input is gone), `STINTMATE_IPC_READ_TOKEN` is no longer read by the workflows or by `scripts/fetch-native.ps1` (the native files are downloaded anonymously over HTTPS), `SECURITY.md` says how to report a vulnerability, and the README has a "Contributing" section. The code is unchanged.
+
 ## 0.3.2+docs.2 (2026-11-01)
 
 - Documentation corrected against the code: a usage section in the README (an example that runs),
